@@ -1,0 +1,45 @@
+version: "3"
+services: 
+
+  auth-db-course-msc1:
+    image: postgres:11
+    container_name: auth-db-course-msc
+    restart: always
+    environment:   
+      - POSTGRES_DB=auth-db-course-msc
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=123456
+    ports: 
+      - 5432:5432
+
+  product-db-course-msc1:
+    image: postgres:11
+    container_name: product-db-course-msc
+    restart: always
+    environment:   
+      - POSTGRES_DB=product-db-course-msc
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=123456
+    ports: 
+      - 5433:5432
+
+  sales-db-course-msc1:
+    image: tutum/mongodb
+    container_name: sales-db-course-msc
+    restart: always
+    environment:   
+      - MONGODB_DATABASE=sales-db-course-msc
+      - MONGODB_USER=admin
+      - POSTGRES_PASS=123456
+    ports: 
+      - 27017:27017
+      - 28017:28017
+
+  sales-rabbit-course-msc1:
+    image: rabbitmq:3-management
+    container_name: sales-rabbit-course-msc
+    restart: always
+    ports: 
+      - 5672:5672
+      - 25676:25676
+      - 15672:15672
