@@ -10,11 +10,13 @@ class UserService {
 
     async findByEmail(req) {
         try {
-            const email = req.params.email;
+            const { email } = req.params;
+            const { authUser } = req;
 
             this.validateRequestEmail(email);
             let user = await UserRepository.findByEmail(email);
             this.validateUserNotFound(user);
+            this.validateAuthenticatedUser(user, authUser)
 
             return {
                 status: httpStatus.OK,
@@ -34,22 +36,15 @@ class UserService {
     }
 
     validateRequestEmail(email) {
-        if (!email) {
-            throw new UserException(httpStatus.BAD_REQUEST, "User email must be informed.")
-        }
+        if (!email) throw new UserException(httpStatus.BAD_REQUEST, "User email must be informed.")
     }
 
     validateUserNotFound(user) {
-        if (!user) {
-            throw new UserException(httpStatus.NOT_FOUND, "User was not found.")
-        }
+        if (!user) throw new UserException(httpStatus.NOT_FOUND, "User was not found.")
     }
 
     async getAccessToken(req) {
-        const {
-            email,
-            password
-        } = req.body;
+        const { email, password } = req.body;
 
         this.validateAccessTokenData(email, password)
         let user = await UserRepository.findByEmail(this.findByEmail)
@@ -82,6 +77,12 @@ class UserService {
     async validatePassword(password, hashPassword) {
         if (!await bcrypt.compare(password, hashPassword)) {
             throw new UserException(httpStatus.UNAUTHORIZED, "Password doesnt match.")
+        }
+    }
+
+    validateAuthenticatedUser(user, authUser) {
+        if(!authUser || user.id !== authUser.id) {
+            throw new UserException(httpStatus.FORBIDDEN, "You're not allowed to see those information")
         }
     }
 

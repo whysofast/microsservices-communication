@@ -7,6 +7,11 @@ const env = process.env;
 const PORT = env.PORT || 8080;
 
 db.createInitialData();
+
+app.get("/health", (req,res) => {
+    return res.status(200).json({status : "up"})
+})
+
 app.use(userRoutes)
 app.use(express.json())
 
