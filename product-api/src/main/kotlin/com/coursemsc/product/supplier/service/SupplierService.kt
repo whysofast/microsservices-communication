@@ -9,4 +9,6 @@ class SupplierService(
     private val repository: SupplierRepository
 ) {
     fun save(supplier: Supplier) = repository.save(supplier)
+
+    fun findById(id: Int) = repository.findById(id).orElseGet { null }
 }

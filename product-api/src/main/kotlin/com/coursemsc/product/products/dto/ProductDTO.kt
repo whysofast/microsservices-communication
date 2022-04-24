@@ -6,8 +6,8 @@ import com.coursemsc.product.products.model.Supplier
 
 data class ProductRequestDTO(
     val name: String,
-    val categoryId: String,
-    val supplierId: String,
+    val categoryId: Int,
+    val supplierId: Int,
     val quantityAvailable: Int
 
 ) {

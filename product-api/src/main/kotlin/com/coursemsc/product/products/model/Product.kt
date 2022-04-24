@@ -1,5 +1,7 @@
 package com.coursemsc.product.products.model
 
+import java.time.LocalDateTime
+import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -24,4 +26,7 @@ data class Product(
     val category: Category,
 
     val quantityAvailable: Int,
+
+    @Column(nullable= false, updatable = false)
+    val createdAt: LocalDateTime? = LocalDateTime.now()
 )
