@@ -44,6 +44,6 @@ class JwtService(
         if (this.lowercase().contains("bearer "))
             return this.replace("bearer ", "")
 
-        throw AuthenticationException("invalid token format")
+        return this
     }
 }
