@@ -1,4 +1,4 @@
-package com.coursemsc.product.jwt.interceptor
+package com.coursemsc.product.config.interceptor
 
 import com.coursemsc.product.jwt.service.JwtService
 import feign.Request

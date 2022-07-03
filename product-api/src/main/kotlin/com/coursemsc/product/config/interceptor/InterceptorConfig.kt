@@ -1,4 +1,4 @@
-package com.coursemsc.product.jwt.interceptor
+package com.coursemsc.product.config.interceptor
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
