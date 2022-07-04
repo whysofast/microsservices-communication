@@ -21,6 +21,6 @@ class ProductService(
     }
 
     fun updateProductStock(productStockDTO: ProductStockDTO) {
-        print(productStockDTO)
+        println(productStockDTO)
     }
 }
