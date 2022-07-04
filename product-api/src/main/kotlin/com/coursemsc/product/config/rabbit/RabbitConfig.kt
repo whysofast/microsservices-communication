@@ -29,18 +29,11 @@ class RabbitConfig(
     @Bean
     fun salesConfirmationMq() = Queue(salesConfirmationMq, true)
 
-    // Ver como fazer sem o builder também
     @Bean
     fun productStockMqBinding(topicExchange: TopicExchange): Binding = BindingBuilder
         .bind(productStockMq())
         .to(topicExchange)
         .with(productStockKey)
-
-    // Ver se assim funciona também
-//    @Bean
-//    fun productStockMqBinding2(topicExchange: TopicExchange) =
-//        Binding(productStockMq, QUEUE, topicExchange.name, productStockKey, null)
-
 
     @Bean
     fun salesConfirmationMqBinding(topicExchange: TopicExchange): Binding = BindingBuilder
