@@ -10,8 +10,7 @@ class ProductStockListener(
     private val productService: ProductService,
 ) {
 
-//    @RabbitListener(queues = ["\${app-config.rabbit.routing-key.product-stock}"])
-    @RabbitListener(queues = ["product-stock-update.routingKey"])
+    @RabbitListener(queues = ["\${app-config.rabbit.queue.product-stock}"])
     fun updateProductStock(productStockDto: ProductStockDTO) {
         productService.updateProductStock(productStockDto)
     }
