@@ -5,5 +5,6 @@ import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.ResponseStatus
 
 @ResponseStatus(HttpStatus.UNAUTHORIZED)
-@ResponseBody()
 class AuthenticationException(message: String) : RuntimeException(message)
+
+class ValidationException(message: String) : RuntimeException(message)
