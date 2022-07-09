@@ -8,9 +8,28 @@ data class ProductStockDTO(
     @JsonProperty("products")
     val products: List<ProductQuantityDTO>
 )
+
 data class ProductQuantityDTO(
     @JsonProperty("productId")
     val productId: Int,
     @JsonProperty("quantity")
-    val quantity: Int
+    var quantity: Long
 )
+
+//{
+//    "salesId" : "aiseuhaseiuhaseiuh123123",
+//    "products" : [
+//        {
+//            "productId": 1000,
+//            "quantity" : 4
+//        },
+//        {
+//            "productId": 2000,
+//            "quantity" : 1
+//        },
+//        {
+//            "productId": 1000,
+//            "quantity" : 10
+//        }
+//    ]
+//}

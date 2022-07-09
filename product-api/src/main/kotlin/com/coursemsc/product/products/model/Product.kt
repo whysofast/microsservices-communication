@@ -9,7 +9,7 @@ import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
 
-@Entity(name="product")
+@Entity(name = "product")
 data class Product(
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -25,8 +25,11 @@ data class Product(
     @JoinColumn(name = "fk_category")
     val category: Category,
 
-    val quantityAvailable: Int,
+    var quantityAvailable: Long,
 
-    @Column(nullable= false, updatable = false)
+    @Column(nullable = false, updatable = false)
     val createdAt: LocalDateTime? = LocalDateTime.now()
-)
+) {
+    // mover pra um model depois, separa em Product e ProductDBO
+    fun updateStock(quantity: Long) = this.apply { quantityAvailable -= quantity }
+}

@@ -16,7 +16,8 @@ class SalesConfirmationSender(
             rabbitTemplate.convertAndSend(
                 rabbitConfig.productTopicExchange,
                 rabbitConfig.salesConfirmationKey,
-                message)
+                message
+            )
             println("Message sent succesfully")
         } catch (e: Exception) {
             println("Error when trying to send message: $e")

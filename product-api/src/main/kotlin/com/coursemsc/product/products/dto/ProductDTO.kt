@@ -8,7 +8,7 @@ data class ProductRequestDTO(
     val name: String,
     val categoryId: Int,
     val supplierId: Int,
-    val quantityAvailable: Int
+    val quantityAvailable: Long
 
 ) {
     fun toModel(category: Category, supplier: Supplier) = Product(
@@ -25,7 +25,7 @@ data class ProductResponseDTO(
     val name: String,
     val category: CategoryResponseDTO,
     val supplier: SupplierResponseDTO,
-    val quantityAvailable: Int
+    val quantityAvailable: Long
 )
 
 fun Product.toDto() = ProductResponseDTO(
