@@ -1,7 +1,6 @@
-package com.coursemsc.product.sales
+package com.coursemsc.product.sales.dto
 
 import com.coursemsc.product.products.dto.ProductStockDTO
-import com.coursemsc.product.sales.SalesStatus.REJECTED
 
 data class SalesConfirmationDTO(
     val salesId: String,
@@ -13,7 +12,7 @@ enum class SalesStatus {
     REJECTED,
 }
 
-fun ProductStockDTO.toSalesConfirmation(status: SalesStatus)= SalesConfirmationDTO(
+fun ProductStockDTO.toSalesConfirmation(status: SalesStatus) = SalesConfirmationDTO(
     salesId = salesId,
     status = status
 )
