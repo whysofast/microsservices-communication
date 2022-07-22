@@ -20,6 +20,7 @@ import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
+
 @Service
 class ProductService(
     private val repository: ProductRepository,
@@ -81,19 +82,19 @@ class ProductService(
         return this
     }
 
+
     fun ProductStockDTO.joinSimilarProducts(): ProductStockDTO {
-        val distinctProducts = mutableListOf<ProductQuantityDTO>()
-        products.forEach { product ->
-            if (distinctProducts.none { it.productId == product.productId }) {
-                distinctProducts.add(product)
-            } else {
-                distinctProducts.find { it.productId == product.productId }!!.apply {
-                    this.quantity += product.quantity
-                }
-            }
-        }
+        val distinctProducts = products
+            .groupBy { it.productId }
+            .map { it.toProductQuantityDTO() }
         return ProductStockDTO(salesId, distinctProducts)
     }
+
+    fun Map.Entry<Int, List<ProductQuantityDTO>>.toProductQuantityDTO() =
+        ProductQuantityDTO(
+            productId = this.key,
+            quantity = this.value.sumOf { it.quantity }
+        )
 
     fun ProductStockDTO.validateStockQuantity(): ProductStockDTO {
         products.forEach {
